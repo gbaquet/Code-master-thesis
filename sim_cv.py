@@ -45,12 +45,12 @@ for j in range(n_sim):
         z=multivariate_normal.rvs(mean=np.zeros(G), cov=K, size=1)
         data[i]=z
 
-    # computing and plotting real cov #
+    # computing real cov #
     x_data = np.linspace(0.0,1.0,grid_points)
     x, y = np.meshgrid(x_data, x_data)
     K=cov(x,y)
 
-    # computing and plotting cov_est with optimal h based on CV #
+    # computing optimal h based on CV #
     start=time.time()
     h_cv=opt_cv.cv_pyt(data, t, G, n, 10, 0.025) 
     end=time.time()
@@ -58,7 +58,7 @@ for j in range(n_sim):
     print()
 
 
-    # computing and plotting cov_est with optimal h based on ISE (which uses real cov) #
+    # computing optimal h based on ISE (which uses real cov) #
     start=time.time()
     h_ise=opt_cv.ise_pyt(data, t, K, h_grid, grid_points, G, n, 0.025)
     end=time.time()
